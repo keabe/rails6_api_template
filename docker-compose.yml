@@ -1,17 +1,17 @@
 version: '3'
 services:
-  db:
-    image: mysql:8.0
-    volumes:
-      - ./tmp/db:/var/lib/mysql
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=1
-  web:
+  api:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/app
+      - "app_tmp:/app/tmp"
     ports:
-      - "3000:3000"
-    depends_on:
-      - db
+      - "3003:3000"
+    env_file:
+      - '.env'
+    stdin_open: true
+    tty: true
+volumes:
+  app_tmp:
+   driver: local
