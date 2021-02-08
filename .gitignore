@@ -22,3 +22,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+Rails.root.join("config", "settings.local.yml").to_s,
+Rails.root.join("config", "settings", "#{Rails.env}.local.yml").to_s,
+Rails.root.join("config", "environments", "#{Rails.env}.local.yml").to_s
+.env
